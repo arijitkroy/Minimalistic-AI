@@ -1,7 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { GoogleGenerativeAI } from "@google/generative-ai";
 import "./Home.css";
-import { GEMINI_API_KEY } from "./key";
 import Markdown from "react-markdown";
 import remarkGfm from "remark-gfm";
 
@@ -12,8 +11,13 @@ const Home = () => {
     const [btnToggle, setButtonToggle] = useState(false);
     const myRef = useRef(null);
     
-    const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);     
+    const genAI = new GoogleGenerativeAI(process.env.REACT_APP_GEMINI_API_KEY);     
     const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });
+
+    useEffect(() => {
+        alert("Message will be forgotten");
+        setButtonToggle(false);
+    }, [])
               
     const generationConfig = {
         temperature: 1,
@@ -26,12 +30,11 @@ const Home = () => {
     const Run = async () => {
         const chatSession = model.startChat({
             generationConfig,
-            history: [
-            ],
+            history: [],
         });
               
         const result = await chatSession.sendMessage(prompt);
-        setResponse([...response, [prompt, result.response.text()]]);
+        setResponse([...response, [prompt, (result.response.text())]]);
         setButtonToggle(false);
     }
 
@@ -47,6 +50,7 @@ const Home = () => {
         else {
             Run();
             scrollToElement();
+            setPrompt("");
         }
     }
 
@@ -68,7 +72,7 @@ const Home = () => {
                 })}
             </div>
             <div className="form-body">
-                <input name="prompt" type="text" placeholder={error ? error : "Enter your prompt here"} onChange={e => (setPrompt(e.target.value), setError(""))}/>
+                <input name="prompt" type="text" value={prompt} placeholder={error ? error : "Enter your prompt here"} onChange={e => (setPrompt(e.target.value), setError(""))}/>
                 <button id="btn_send" onClick={handleSubmit} disabled={btnToggle} >{btnToggle == false ? "Send" : "Wait..."}</button>
             </div>
         </div>
