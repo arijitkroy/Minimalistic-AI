@@ -1,0 +1,96 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-size: 16px;
+    font-style: oblique;
+    font-weight: 800;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    background-color: #4B5945;
+}
+
+.container h1 {
+    text-align: center;
+    margin: 1% 0;
+    font-size: 30px;
+    color: #d1dfce;
+}
+
+.form-body {
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+input[name="prompt"] {
+    flex-basis: 85%;
+    border-radius: 5px;
+    border-color: #66785F;
+    background-color: #d1dfce;
+    border-width: 0.5px;
+    text-align: center;
+    color: #4B5945;
+}
+
+button[id="btn_send"] {
+    flex-basis: 10%;
+    height: 40px;
+    border-radius: 5px;
+    border-color: green;
+    color: rgb(49, 89, 49);
+    border-width: 0.5px;
+    background-color: rgb(190, 255, 190);
+}
+
+input[name="prompt"]:focus {
+    outline: none;
+}
+
+button[id="btn_send"]:hover {
+    background-color: rgb(69, 125, 69);
+    color: white;
+    outline: none;
+}
+
+.response-body {
+    display: flex;
+    flex-direction: column;
+    margin: 0 5% 0 5%;
+    height: 800px;
+    overflow-y: scroll;
+}
+
+.response-text {
+    background-color: #66785F;
+    color: #d1dfce;
+    padding: 10px 30px;
+    margin: 5px;
+    border-radius: 10px;
+}
+
+.response-body .response {
+    text-align: justify;
+    font-size: 20px;
+}
+
+.prompt {
+    font-size: 25px;
+    text-align: center;
+    line-height: 150%;
+    background-color: #d1dfce;
+    color: #4B5945;
+    border-radius: 5px;
+    margin-bottom: 10px;
+}
+
+::-webkit-scrollbar {
+    width: 0; 
+    background: transparent;
+}
